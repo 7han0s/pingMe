@@ -162,3 +162,4 @@ if __name__ == "__main__":
 ```
 
 Feel free to customize the script to fit your specific needs!
+Note: Can be useful for keeping task accountablity
