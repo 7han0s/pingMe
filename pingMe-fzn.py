@@ -123,6 +123,3 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     ping(args.interval, args.sound, args.message, args.max_misses, args.notification_title, args.notification_message, args.notification_timeout)    
-
-if __name__ == "__main__":
-    ping(1800, 'ping.mp3', 'Still awake?')
