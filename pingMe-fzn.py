@@ -35,6 +35,9 @@ def check(check_in_interval, sound_file, message):
         check_in_interval: Time between checks in seconds.
         sound_file: Path to the ping sound file.
         message: Check-in message.
+        notification_title: Notification title.
+        notification_message: Notification message.
+        notification_timeout: Notification timeout in seconds.
 
     Returns:
         True if the user responded positively, False otherwise.
@@ -44,9 +47,9 @@ def check(check_in_interval, sound_file, message):
     play_sound(sound_file)
 
     notification.notify(
-        title='Ping Notification',
-        message=message,
-        timeout=10
+        title=notification_title,
+        message=notification_message,
+        timeout=notification_timeout
     )
 
     reply_received = threading.Event()
@@ -84,7 +87,7 @@ def finalize():
     print("Sleep protocol deactivated!")
     play_sound('end.mp3')
 
-def ping(check_in_interval, sound_file, message):
+def ping(check_in_interval, sound_file, message, notification_title, notification_message, notification_timeout, max_misses):
     """Main check-in loop.
 
     Args:
