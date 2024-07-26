@@ -1,4 +1,5 @@
 import os
+import argparse
 import time
 import threading
 from playsound import playsound
@@ -102,6 +103,23 @@ def ping(check_in_interval, sound_file, message):
             missed_pings += 1
 
     finalize()
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="PingMe: A check-in tool")
+    parser.add_argument("-i", "--interval", type=int, default=1800, help="Check-in interval in seconds (default: 1800)")
+    parser.add_argument("-s", "--sound", type=str, default="ping.mp3", help="Sound file path (default: ping.mp3)")
+    parser.add_argument("-m", "--message", type=str, default="Still awake?", help="Check-in message (default: Still awake?)")
+    parser.add_argument("-n", "--max-misses", type=int, default=2, help="Maximum number of missed pings before stopping (default: 2)")
+    parser.add_argument("-nt", "--notification-title", type=str, default="Ping Notification", help="Notification title (default: Ping Notification)")
+    parser.add_argument("-nm", "--notification-message", type=str, default="Still awake?", help="Notification message (default: Still awake?)")
+    parser.add_argument("-ntt", "--notification-timeout", type=int, default=10, help="Notification timeout in seconds (default: 10)")
+
+    args = parser.parse_args()
+    return args
+
+if __name__ == "__main__":
+    args = parse_args()
+    ping(args.interval, args.sound, args.message, args.max_misses, args.notification_title, args.notification_message, args.notification_timeout)    
 
 if __name__ == "__main__":
     ping(1800, 'ping.mp3', 'Still awake?')
